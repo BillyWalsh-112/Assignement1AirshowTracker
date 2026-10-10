@@ -1,13 +1,13 @@
 package org.setu.AirshowTracker.models
 
 /**
- * Data class representing a single PlacedMark item.
- * Kotlin automatically generates toString(), equals(), hashCode(), and copy().
+ * Data class representing an Airshow item.
  */
-data class PlacedMark(
+data class Airshow(
     var id: Long = 0L,
     var title: String = "",
     var description: String = "",
+    var location: String = "",
     var x: Double = 0.0,
     var y: Double = 0.0
 )

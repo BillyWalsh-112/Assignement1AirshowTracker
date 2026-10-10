@@ -1,10 +1,10 @@
 package org.setu.AirshowTracker.main
 
-import org.setu.AirshowTracker.models.PlacedMarkMemStore
-import org.setu.AirshowTracker.models.PlacedMarkStore
-import org.setu.AirshowTracker.models.PlacedMark
+import org.setu.AirshowTracker.models.Airshow
+import org.setu.AirshowTracker.models.AirshowMemStore
+import org.setu.AirshowTracker.models.AirshowStore
 
-val store: PlacedMarkStore = PlacedMarkMemStore()
+val store: AirshowStore = AirshowMemStore()
 
 fun main() {
     println("=== AirshowTracker Console App ===")
@@ -12,11 +12,11 @@ fun main() {
     do {
         input = menu()
         when (input) {
-            1 -> addPlacedMark()
-            2 -> listPlacedMarks()
-            3 -> updatePlacedMark()
-            4 -> deletePlacedMark()
-            5 -> searchPlacedMark()
+            1 -> addAirshow()
+            2 -> listAirshows()
+            3 -> updateAirshow()
+            4 -> deleteAirshow()
+            5 -> searchAirshow()
             0 -> println("\nExiting AirshowTracker application. Goodbye!")
             else -> println("\nInvalid option. Please try again.")
         }
@@ -27,48 +27,54 @@ fun menu(): Int {
     println("\n----------------------------------")
     println(" MAIN MENU")
     println("----------------------------------")
-    println(" 1. Add Placed Mark")
-    println(" 2. List All Placed Marks")
-    println(" 3. Update a Placed Mark")
-    println(" 4. Delete a Placed Mark")
-    println(" 5. Search Placed Mark by ID")
+    println(" 1. Add Airshow")
+    println(" 2. List All Airshows")
+    println(" 3. Update an Airshow")
+    println(" 4. Delete an Airshow")
+    println(" 5. Search Airshow by ID")
     println(" 0. Exit")
     print("\nEnter option: ")
     return readlnOrNull()?.toIntOrNull() ?: -1
 }
 
-fun addPlacedMark() {
-    println("\n--- Add Placed Mark ---")
+fun addAirshow() {
+    println("\n--- Add Airshow ---")
     print("Enter Title: ")
     val title = readlnOrNull()?.trim().orEmpty()
     print("Enter Description: ")
     val description = readlnOrNull()?.trim().orEmpty()
+    print("Enter Location: ")
+    val location = readlnOrNull()?.trim().orEmpty()
+    print("Enter Location X Coordinate: ")
+    val x = readlnOrNull()?.toDoubleOrNull() ?: 0.0
+    print("Enter Location Y Coordinate: ")
+    val y = readlnOrNull()?.toDoubleOrNull() ?: 0.0
 
     if (title.isNotEmpty()) {
-        val mark = PlacedMark(title = title, description = description)
-        store.create(mark)
-        println("Placed Mark added successfully with ID: ${mark.id}")
+        val airshow = Airshow(title = title, description = description, location = location, x = x, y = y)
+        store.create(airshow)
+        println("Airshow added successfully with ID: ${airshow.id}")
     } else {
         println("Title cannot be empty. Creation cancelled.")
     }
 }
 
-fun listPlacedMarks() {
-    println("\n--- All Placed Marks ---")
-    val marks = store.findAll()
-    if (marks.isEmpty()) {
-        println("No placed marks stored yet.")
+fun listAirshows() {
+    println("\n--- All Airshows ---")
+    val airshows = store.findAll()
+    if (airshows.isEmpty()) {
+        println("No airshows stored yet.")
     } else {
-        marks.forEach { println("ID: ${it.id} | Title: ${it.title} | Description: ${it.description}") }
+        airshows.forEach { println("ID: ${it.id} | Title: ${it.title} | Location: ${it.location} (X: ${it.x}, Y: ${it.y}) | Description: ${it.description}") }
     }
 }
 
-fun updatePlacedMark() {
-    println("\n--- Update Placed Mark ---")
-    listPlacedMarks()
+fun updateAirshow() {
+    println("\n--- Update Airshow ---")
+    listAirshows()
     if (store.findAll().isEmpty()) return
 
-    print("\nEnter ID of Placed Mark to update: ")
+    print("\nEnter ID of Airshow to update: ")
     val id = readlnOrNull()?.toLongOrNull()
 
     if (id != null && store.findOne(id) != null) {
@@ -76,49 +82,55 @@ fun updatePlacedMark() {
         val title = readlnOrNull()?.trim().orEmpty()
         print("Enter New Description: ")
         val description = readlnOrNull()?.trim().orEmpty()
+        print("Enter New Location: ")
+        val location = readlnOrNull()?.trim().orEmpty()
+        print("Enter New Location X Coordinate: ")
+        val x = readlnOrNull()?.toDoubleOrNull() ?: 0.0
+        print("Enter New Location Y Coordinate: ")
+        val y = readlnOrNull()?.toDoubleOrNull() ?: 0.0
 
         if (title.isNotEmpty()) {
-            val updated = store.update(PlacedMark(id = id, title = title, description = description))
-            if (updated) println("Placed Mark updated successfully.")
+            val updated = store.update(Airshow(id = id, title = title, description = description, location = location, x = x, y = y))
+            if (updated) println("Airshow updated successfully.")
         } else {
             println("Title cannot be empty. Update cancelled.")
         }
     } else {
-        println("Placed Mark with ID $id not found.")
+        println("Airshow with ID $id not found.")
     }
 }
 
-fun deletePlacedMark() {
-    println("\n--- Delete Placed Mark ---")
-    listPlacedMarks()
+fun deleteAirshow() {
+    println("\n--- Delete Airshow ---")
+    listAirshows()
     if (store.findAll().isEmpty()) return
 
-    print("\nEnter ID of Placed Mark to delete: ")
+    print("\nEnter ID of Airshow to delete: ")
     val id = readlnOrNull()?.toLongOrNull()
 
     if (id != null) {
         val deleted = store.delete(id)
         if (deleted) {
-            println("Placed Mark with ID $id deleted successfully.")
+            println("Airshow with ID $id deleted successfully.")
         } else {
-            println("Placed Mark with ID $id not found.")
+            println("Airshow with ID $id not found.")
         }
     } else {
         println("Invalid ID entered.")
     }
 }
 
-fun searchPlacedMark() {
-    println("\n--- Search Placed Mark ---")
+fun searchAirshow() {
+    println("\n--- Search Airshow ---")
     print("Enter ID: ")
     val id = readlnOrNull()?.toLongOrNull()
 
     if (id != null) {
-        val mark = store.findOne(id)
-        if (mark != null) {
-            println("Found: ID: ${mark.id} | Title: ${mark.title} | Description: ${mark.description}")
+        val airshow = store.findOne(id)
+        if (airshow != null) {
+            println("Found: ID: ${airshow.id} | Title: ${airshow.title} | Location: ${airshow.location} (X: ${airshow.x}, Y: ${airshow.y}) | Description: ${airshow.description}")
         } else {
-            println("No placed mark found with ID $id.")
+            println("No airshow found with ID $id.")
         }
     } else {
         println("Invalid ID entered.")

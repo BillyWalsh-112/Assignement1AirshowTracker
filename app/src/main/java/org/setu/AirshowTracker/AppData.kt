@@ -1,7 +1,9 @@
 package org.setu.AirshowTracker
 
-import org.setu.AirshowTracker.models.PlacedMarkMemStore
+import org.setu.AirshowTracker.models.AirshowMemStore
 
 object AppData {
-    val placedMark = PlacedMarkMemStore()
+    val airshows = AirshowMemStore()
 }
+
+

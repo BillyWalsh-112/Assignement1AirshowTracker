@@ -1,21 +1,20 @@
 package org.setu.AirshowTracker
 
-import org.setu.AirshowTracker.models.PlacedMark
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.setu.AirshowTracker.models.Airshow
 
+class AirshowAdapter(
+    private var airshows: List<Airshow>,
+    private val onEdit: (Airshow) -> Unit,
+    private val onDelete: (Airshow) -> Unit
+) : RecyclerView.Adapter<AirshowAdapter.AirshowViewHolder>() {
 
-class PlacedMarkAdapter(
-    private var marks: List<PlacedMark>,
-    private val onEdit: (PlacedMark) -> Unit,
-    private val onDelete: (PlacedMark) -> Unit
-) : RecyclerView.Adapter<PlacedMarkAdapter.MarkViewHolder>() {
-
-    class MarkViewHolder(itemView: View) :
+    class AirshowViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
         val titleText: TextView =
@@ -23,6 +22,9 @@ class PlacedMarkAdapter(
 
         val descriptionText: TextView =
             itemView.findViewById(R.id.descriptionText)
+
+        val locationText: TextView =
+            itemView.findViewById(R.id.locationText)
 
         val coordinatesText: TextView =
             itemView.findViewById(R.id.coordinatesText)
@@ -37,49 +39,52 @@ class PlacedMarkAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MarkViewHolder {
+    ): AirshowViewHolder {
 
         val view = LayoutInflater.from(parent.context)
             .inflate(
-                R.layout.item_placed_mark,
+                R.layout.item_airshow,
                 parent,
                 false
             )
 
-        return MarkViewHolder(view)
+        return AirshowViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: MarkViewHolder,
+        holder: AirshowViewHolder,
         position: Int
     ) {
 
-        val mark = marks[position]
+        val airshow = airshows[position]
 
         holder.titleText.text =
-            "${mark.id}: ${mark.title}"
+            "${airshow.id}: ${airshow.title}"
 
         holder.descriptionText.text =
-            mark.description
+            airshow.description
+
+        holder.locationText.text =
+            if (airshow.location.isNotEmpty()) "Location: ${airshow.location}" else ""
 
         holder.coordinatesText.text =
-            "X: ${mark.x}, Y: ${mark.y}"
+            "Location Coordinates: X: ${airshow.x}, Y: ${airshow.y}"
 
         holder.editButton.setOnClickListener {
-            onEdit(mark)
+            onEdit(airshow)
         }
 
         holder.deleteButton.setOnClickListener {
-            onDelete(mark)
+            onDelete(airshow)
         }
     }
 
     override fun getItemCount(): Int {
-        return marks.size
+        return airshows.size
     }
 
-    fun updateMarks(newMarks: List<PlacedMark>) {
-        marks = newMarks
+    fun updateAirshows(newAirshows: List<Airshow>) {
+        airshows = newAirshows
         notifyDataSetChanged()
     }
 }

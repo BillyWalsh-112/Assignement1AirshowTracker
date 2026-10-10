@@ -5,25 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MarkListActivity">
+    tools:context=".AirshowListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/marksTitle"
-            android:layout_width="195dp"
+            android:id="@+id/airshowsTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Placed Marks"
+            android:text="Airshows"
             android:textSize="28sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/marksRecyclerView"
+            android:id="@+id/airshowsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
