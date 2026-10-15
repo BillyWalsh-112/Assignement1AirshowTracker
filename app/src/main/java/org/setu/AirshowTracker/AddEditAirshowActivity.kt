@@ -1,27 +1,34 @@
 package org.setu.AirshowTracker
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.google.android.material.textfield.TextInputEditText
 import org.setu.AirshowTracker.models.Airshow
 
 class AddEditAirshowActivity : AppCompatActivity() {
 
-    private lateinit var titleInput: EditText
-    private lateinit var descriptionInput: EditText
-    private lateinit var locationInput: EditText
-    private lateinit var themeInput: EditText
-    private lateinit var aircraftInput: EditText
+    private lateinit var titleInput: TextInputEditText
+    private lateinit var descriptionInput: TextInputEditText
+    private lateinit var locationInput: TextInputEditText
+    private lateinit var themeInput: TextInputEditText
+    private lateinit var aircraftInput: TextInputEditText
 
     private var editingId: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_add_edit_airshow)
 
+        // --- Toolbar ---
+        val toolbar = findViewById<Toolbar>(R.id.toolbarAdd)
+        setSupportActionBar(toolbar)
+
+        // --- Field bindings ---
         titleInput = findViewById(R.id.titleInput)
         descriptionInput = findViewById(R.id.descriptionInput)
         locationInput = findViewById(R.id.locationInput)
@@ -29,9 +36,8 @@ class AddEditAirshowActivity : AppCompatActivity() {
         aircraftInput = findViewById(R.id.aircraftInput)
 
         val saveButton = findViewById<Button>(R.id.saveButton)
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbarAdd)
-        setSupportActionBar(toolbar)
 
+        // --- Edit mode? ---
         editingId = intent.getLongExtra("id", -1L).takeIf { it != -1L }
         supportActionBar?.title = if (editingId == null) "Add Airshow" else "Edit Airshow"
 
@@ -42,15 +48,14 @@ class AddEditAirshowActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveAirshow()
         }
-
     }
 
-    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_airshow, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> {
                 finish()
@@ -63,12 +68,7 @@ class AddEditAirshowActivity : AppCompatActivity() {
         val airshow = AppData.airshows.findOne(id)
 
         if (airshow == null) {
-            Toast.makeText(
-                this,
-                "Airshow not found",
-                Toast.LENGTH_SHORT
-            ).show()
-
+            Toast.makeText(this, "Airshow not found", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -93,38 +93,30 @@ class AddEditAirshowActivity : AppCompatActivity() {
         }
 
         if (editingId == null) {
-            val airshow = Airshow(
-                title = title,
-                description = description,
-                location = location,
-                theme = theme,
-                aircraft = aircraft
+            // New airshow
+            AppData.airshows.create(
+                Airshow(
+                    title = title,
+                    description = description,
+                    location = location,
+                    theme = theme,
+                    aircraft = aircraft
+                )
             )
-
-            AppData.airshows.create(airshow)
-
-            Toast.makeText(
-                this,
-                "Airshow created",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(this, "Airshow created", Toast.LENGTH_SHORT).show()
         } else {
-            val airshow = Airshow(
-                id = editingId!!,
-                title = title,
-                description = description,
-                location = location,
-                theme = theme,
-                aircraft = aircraft
+            // Editing existing airshow
+            AppData.airshows.update(
+                Airshow(
+                    id = editingId!!,
+                    title = title,
+                    description = description,
+                    location = location,
+                    theme = theme,
+                    aircraft = aircraft
+                )
             )
-
-            AppData.airshows.update(airshow)
-
-            Toast.makeText(
-                this,
-                "Airshow updated",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(this, "Airshow updated", Toast.LENGTH_SHORT).show()
         }
         finish()
     }
