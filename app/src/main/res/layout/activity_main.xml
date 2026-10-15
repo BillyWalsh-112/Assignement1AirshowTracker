@@ -60,13 +60,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Airshow"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="#FFFFFF"
             android:textSize="16sp" />
+
 
         <Button
             android:id="@+id/viewAirshowsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Airshows"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
     </LinearLayout>
