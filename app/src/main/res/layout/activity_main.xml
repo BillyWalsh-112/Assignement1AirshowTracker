@@ -25,9 +25,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="top|center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
+        android:paddingTop="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,20 +51,26 @@
             android:id="@+id/addAirshowButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Airshow"
+            android:layout_marginBottom="14dp"
             android:backgroundTint="@color/colorAccent"
+            android:text="Add Airshow"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
+            android:textSize="16sp"
+            android:letterSpacing="0.05"
+            android:paddingVertical="16dp"
+            app:cornerRadius="14dp" />
 
         <Button
             android:id="@+id/viewAirshowsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Airshows"
             android:backgroundTint="@color/colorAccent"
+            android:text="View Airshows"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="16sp"
+            android:letterSpacing="0.05"
+            android:paddingVertical="16dp"
+            app:cornerRadius="14dp" />
 
     </LinearLayout>
 
