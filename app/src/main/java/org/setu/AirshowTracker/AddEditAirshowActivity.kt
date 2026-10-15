@@ -12,8 +12,8 @@ class AddEditAirshowActivity : AppCompatActivity() {
     private lateinit var titleInput: EditText
     private lateinit var descriptionInput: EditText
     private lateinit var locationInput: EditText
-    private lateinit var xInput: EditText
-    private lateinit var yInput: EditText
+    private lateinit var themeInput: EditText
+    private lateinit var aircraftInput: EditText
 
     private var editingId: Long? = null
 
@@ -25,11 +25,10 @@ class AddEditAirshowActivity : AppCompatActivity() {
         titleInput = findViewById(R.id.titleInput)
         descriptionInput = findViewById(R.id.descriptionInput)
         locationInput = findViewById(R.id.locationInput)
-        xInput = findViewById(R.id.xInput)
-        yInput = findViewById(R.id.yInput)
+        themeInput = findViewById(R.id.themeInput)
+        aircraftInput = findViewById(R.id.aircraftInput)
 
         val saveButton = findViewById<Button>(R.id.saveButton)
-        val cancelButton = findViewById<Button>(R.id.cancelButton)
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbarAdd)
         setSupportActionBar(toolbar)
 
@@ -44,11 +43,7 @@ class AddEditAirshowActivity : AppCompatActivity() {
             saveAirshow()
         }
 
-        cancelButton.setOnClickListener {
-            finish()
-        }
     }
-
 
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_airshow, menu)
@@ -81,29 +76,19 @@ class AddEditAirshowActivity : AppCompatActivity() {
         titleInput.setText(airshow.title)
         descriptionInput.setText(airshow.description)
         locationInput.setText(airshow.location)
-        xInput.setText(airshow.x.toString())
-        yInput.setText(airshow.y.toString())
+        themeInput.setText(airshow.theme)
+        aircraftInput.setText(airshow.aircraft)
     }
 
     private fun saveAirshow() {
         val title = titleInput.text.toString().trim()
         val description = descriptionInput.text.toString().trim()
         val location = locationInput.text.toString().trim()
+        val theme = themeInput.text.toString().trim()
+        val aircraft = aircraftInput.text.toString().trim()
 
         if (title.isEmpty()) {
             titleInput.error = "Title is required"
-            return
-        }
-
-        val x = xInput.text.toString().toDoubleOrNull()
-        if (x == null) {
-            xInput.error = "Enter a valid number for location (X coordinate)"
-            return
-        }
-
-        val y = yInput.text.toString().toDoubleOrNull()
-        if (y == null) {
-            yInput.error = "Enter a valid number for location (Y coordinate)"
             return
         }
 
@@ -112,8 +97,8 @@ class AddEditAirshowActivity : AppCompatActivity() {
                 title = title,
                 description = description,
                 location = location,
-                x = x,
-                y = y
+                theme = theme,
+                aircraft = aircraft
             )
 
             AppData.airshows.create(airshow)
@@ -129,10 +114,9 @@ class AddEditAirshowActivity : AppCompatActivity() {
                 title = title,
                 description = description,
                 location = location,
-                x = x,
-                y = y
+                theme = theme,
+                aircraft = aircraft
             )
-
 
             AppData.airshows.update(airshow)
 

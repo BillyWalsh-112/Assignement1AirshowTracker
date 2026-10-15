@@ -45,13 +45,13 @@ fun addAirshow() {
     val description = readlnOrNull()?.trim().orEmpty()
     print("Enter Location: ")
     val location = readlnOrNull()?.trim().orEmpty()
-    print("Enter Location X Coordinate: ")
-    val x = readlnOrNull()?.toDoubleOrNull() ?: 0.0
-    print("Enter Location Y Coordinate: ")
-    val y = readlnOrNull()?.toDoubleOrNull() ?: 0.0
+    print("Enter Theme: ")
+    val theme = readlnOrNull()?.trim().orEmpty()
+    print("Enter Aircraft: ")
+    val aircraft = readlnOrNull()?.trim().orEmpty()
 
     if (title.isNotEmpty()) {
-        val airshow = Airshow(title = title, description = description, location = location, x = x, y = y)
+        val airshow = Airshow(title = title, description = description, location = location, theme = theme, aircraft = aircraft)
         store.create(airshow)
         println("Airshow added successfully with ID: ${airshow.id}")
     } else {
@@ -65,7 +65,7 @@ fun listAirshows() {
     if (airshows.isEmpty()) {
         println("No airshows stored yet.")
     } else {
-        airshows.forEach { println("ID: ${it.id} | Title: ${it.title} | Location: ${it.location} (X: ${it.x}, Y: ${it.y}) | Description: ${it.description}") }
+        airshows.forEach { println("ID: ${it.id} | Title: ${it.title} | Location: ${it.location} | Theme: ${it.theme} | Aircraft: ${it.aircraft} | Description: ${it.description}") }
     }
 }
 
@@ -84,13 +84,13 @@ fun updateAirshow() {
         val description = readlnOrNull()?.trim().orEmpty()
         print("Enter New Location: ")
         val location = readlnOrNull()?.trim().orEmpty()
-        print("Enter New Location X Coordinate: ")
-        val x = readlnOrNull()?.toDoubleOrNull() ?: 0.0
-        print("Enter New Location Y Coordinate: ")
-        val y = readlnOrNull()?.toDoubleOrNull() ?: 0.0
+        print("Enter New Theme: ")
+        val theme = readlnOrNull()?.trim().orEmpty()
+        print("Enter New Aircraft: ")
+        val aircraft = readlnOrNull()?.trim().orEmpty()
 
         if (title.isNotEmpty()) {
-            val updated = store.update(Airshow(id = id, title = title, description = description, location = location, x = x, y = y))
+            val updated = store.update(Airshow(id = id, title = title, description = description, location = location, theme = theme, aircraft = aircraft))
             if (updated) println("Airshow updated successfully.")
         } else {
             println("Title cannot be empty. Update cancelled.")
@@ -128,7 +128,7 @@ fun searchAirshow() {
     if (id != null) {
         val airshow = store.findOne(id)
         if (airshow != null) {
-            println("Found: ID: ${airshow.id} | Title: ${airshow.title} | Location: ${airshow.location} (X: ${airshow.x}, Y: ${airshow.y}) | Description: ${airshow.description}")
+            println("Found: ID: ${airshow.id} | Title: ${airshow.title} | Location: ${airshow.location} | Theme: ${airshow.theme} | Aircraft: ${airshow.aircraft} | Description: ${airshow.description}")
         } else {
             println("No airshow found with ID $id.")
         }

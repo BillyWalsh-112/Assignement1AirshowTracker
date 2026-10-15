@@ -25,7 +25,13 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/coordinatesText"
+        android:id="@+id/themeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/aircraftText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp" />

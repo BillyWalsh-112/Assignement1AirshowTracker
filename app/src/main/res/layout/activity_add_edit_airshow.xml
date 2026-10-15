@@ -18,6 +18,7 @@
             android:id="@+id/toolbarAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:title="Add Airshow"
             app:titleTextColor="@color/colorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -57,20 +58,20 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/xInput"
+                android:id="@+id/themeInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="X coordinate (location)"
-                android:inputType="number|numberDecimal|numberSigned" />
+                android:hint="Airshow Theme"
+                android:inputType="text" />
 
             <EditText
-                android:id="@+id/yInput"
+                android:id="@+id/aircraftInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Y coordinate (location)"
-                android:inputType="number|numberDecimal|numberSigned" />
+                android:hint="Aircraft"
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/saveButton"
@@ -78,11 +79,6 @@
                 android:layout_height="wrap_content"
                 android:text="Save" />
 
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
