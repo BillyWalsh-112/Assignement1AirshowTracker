@@ -3,7 +3,6 @@ package org.setu.AirshowTracker
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.setu.AirshowTracker.models.Airshow
@@ -31,11 +30,13 @@ class AddEditAirshowActivity : AppCompatActivity() {
 
         val saveButton = findViewById<Button>(R.id.saveButton)
         val cancelButton = findViewById<Button>(R.id.cancelButton)
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbarAdd)
+        setSupportActionBar(toolbar)
 
         editingId = intent.getLongExtra("id", -1L).takeIf { it != -1L }
+        supportActionBar?.title = if (editingId == null) "Add Airshow" else "Edit Airshow"
 
         if (editingId != null) {
-            findViewById<TextView>(R.id.formTitle).text = "Edit Airshow"
             loadExistingAirshow(editingId!!)
         }
 
@@ -46,6 +47,21 @@ class AddEditAirshowActivity : AppCompatActivity() {
         cancelButton.setOnClickListener {
             finish()
         }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_airshow, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun loadExistingAirshow(id: Long) {
@@ -117,6 +133,7 @@ class AddEditAirshowActivity : AppCompatActivity() {
                 y = y
             )
 
+
             AppData.airshows.update(airshow)
 
             Toast.makeText(
@@ -125,7 +142,6 @@ class AddEditAirshowActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-
         finish()
     }
 }
