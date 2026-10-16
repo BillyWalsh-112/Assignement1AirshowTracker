@@ -26,6 +26,9 @@ class AirshowAdapter(
         val locationText: TextView =
             itemView.findViewById(R.id.locationText)
 
+        val dateText: TextView =
+            itemView.findViewById(R.id.dateText)
+
         val themeText: TextView =
             itemView.findViewById(R.id.themeText)
 
@@ -69,6 +72,9 @@ class AirshowAdapter(
 
         holder.locationText.text =
             if (airshow.location.isNotEmpty()) "Location: ${airshow.location}" else ""
+
+        holder.dateText.text =
+            if (airshow.date.isNotEmpty()) "Date: ${airshow.date}" else ""
 
         holder.themeText.text =
             if (airshow.theme.isNotEmpty()) "Theme: ${airshow.theme}" else ""

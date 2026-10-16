@@ -21,6 +21,7 @@ class AirshowMemStore : AirshowStore {
             found.title = airshow.title
             found.description = airshow.description
             found.location = airshow.location
+            found.date = airshow.date
             found.theme = airshow.theme
             found.aircraft = airshow.aircraft
             true
