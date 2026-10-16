@@ -8,12 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.setu.AirshowTracker.models.Airshow
 
+
+// Binds a list of Airshow objects to the RecyclerView in the list screen
 class AirshowAdapter(
     private var airshows: List<Airshow>,
     private val onEdit: (Airshow) -> Unit,
     private val onDelete: (Airshow) -> Unit
 ) : RecyclerView.Adapter<AirshowAdapter.AirshowViewHolder>() {
 
+
+    // Holds references to the views in each row (avoids repeated findViewById)
     class AirshowViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -41,7 +45,7 @@ class AirshowAdapter(
         val deleteButton: Button =
             itemView.findViewById(R.id.deleteButton)
     }
-
+    // Inflates the row layout (item_airshow.xml) and returns a new ViewHolder
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -57,16 +61,18 @@ class AirshowAdapter(
         return AirshowViewHolder(view)
     }
 
+    // Fills each row with data from the corresponding Airshow object
     override fun onBindViewHolder(
         holder: AirshowViewHolder,
         position: Int
     ) {
 
         val airshow = airshows[position]
-
+// Set the main title with ID prefix
         holder.titleText.text =
             "${airshow.id}: ${airshow.title}"
 
+        // Set other fields, hiding empty ones
         holder.descriptionText.text =
             airshow.description
 
@@ -82,6 +88,7 @@ class AirshowAdapter(
         holder.aircraftText.text =
             if (airshow.aircraft.isNotEmpty()) "Aircraft: ${airshow.aircraft}" else ""
 
+        // Wire up Edit and Delete button taps to the callbacks
         holder.editButton.setOnClickListener {
             onEdit(airshow)
         }
@@ -90,11 +97,11 @@ class AirshowAdapter(
             onDelete(airshow)
         }
     }
-
+    // Tells the RecyclerView how many rows to display
     override fun getItemCount(): Int {
         return airshows.size
     }
-
+    // Replaces the current list with a new one and refreshes the UI
     fun updateAirshows(newAirshows: List<Airshow>) {
         airshows = newAirshows
         notifyDataSetChanged()
