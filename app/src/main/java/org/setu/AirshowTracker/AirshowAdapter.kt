@@ -26,8 +26,11 @@ class AirshowAdapter(
         val locationText: TextView =
             itemView.findViewById(R.id.locationText)
 
-        val coordinatesText: TextView =
-            itemView.findViewById(R.id.coordinatesText)
+        val themeText: TextView =
+            itemView.findViewById(R.id.themeText)
+
+        val aircraftText: TextView =
+            itemView.findViewById(R.id.aircraftText)
 
         val editButton: Button =
             itemView.findViewById(R.id.editButton)
@@ -67,8 +70,11 @@ class AirshowAdapter(
         holder.locationText.text =
             if (airshow.location.isNotEmpty()) "Location: ${airshow.location}" else ""
 
-        holder.coordinatesText.text =
-            "Location Coordinates: X: ${airshow.x}, Y: ${airshow.y}"
+        holder.themeText.text =
+            if (airshow.theme.isNotEmpty()) "Theme: ${airshow.theme}" else ""
+
+        holder.aircraftText.text =
+            if (airshow.aircraft.isNotEmpty()) "Aircraft: ${airshow.aircraft}" else ""
 
         holder.editButton.setOnClickListener {
             onEdit(airshow)

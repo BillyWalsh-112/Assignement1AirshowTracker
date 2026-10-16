@@ -7,12 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:soundEffectsEnabled="false"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="top|center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
+        android:paddingTop="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,24 +37,40 @@
             android:id="@+id/mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Airshows"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+            android:text="Airshow Tracker"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:shadowColor="#80000000"
+            android:shadowDx="0"
+            android:shadowDy="2"
+            android:shadowRadius="6"
+            android:layout_marginBottom="24dp" />
 
         <Button
             android:id="@+id/addAirshowButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:backgroundTint="@color/colorAccent"
             android:text="Add Airshow"
-            android:textSize="16sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:letterSpacing="0.05"
+            android:paddingVertical="16dp"
+            app:cornerRadius="14dp" />
 
         <Button
             android:id="@+id/viewAirshowsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
             android:text="View Airshows"
-            android:textSize="20sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:letterSpacing="0.05"
+            android:paddingVertical="16dp"
+            app:cornerRadius="14dp" />
 
     </LinearLayout>
 
