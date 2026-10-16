@@ -37,15 +37,15 @@
             android:id="@+id/mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Airshow Tracker"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
+            android:layout_marginBottom="24dp"
             android:shadowColor="#80000000"
             android:shadowDx="0"
             android:shadowDy="2"
             android:shadowRadius="6"
-            android:layout_marginBottom="24dp" />
+            android:text="Airshow Tracker"
+            android:textColor="#140101"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/addAirshowButton"
