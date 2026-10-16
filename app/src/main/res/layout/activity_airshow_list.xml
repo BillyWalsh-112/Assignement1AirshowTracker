@@ -20,6 +20,15 @@
             android:layout_height="?attr/actionBarSize"
             app:title="All Airshows"
             app:titleTextColor="#FFFFFF" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            app:iconifiedByDefault="false"
+            app:queryHint="Search by title or location..." />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
@@ -48,6 +57,7 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/emptyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No airshows yet."
